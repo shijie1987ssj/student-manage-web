@@ -1,0 +1,69 @@
+/*  <!-- cmbc begin --> */
+/*弹出框*/
+.tips-box {position: fixed;z-index: 9999;width:470px;}
+.tips-box-n-h {height:40px;background-color:#f3f3f3;}
+.tips-box-n-h span{height:40px;line-height:40px; padding-left:20px; font-size:16px;}
+.tips-box-n-h span.login_guanbi{font-size:14px;}
+.tips-box-n-b {height:40px;background-color:#f3f3f3;text-align: center;}
+.tips-box-n-b a {
+	color: #0000FF !important;
+    display: block !important;
+    font-family: "微软雅黑" !important;
+    height: 36px;
+    line-height: 36px !important;
+    margin:auto;
+    text-align: center !important;
+    width: 50px !important;
+	border-radius: 3px;
+	cursor:pointer;
+	border:0;
+	text-indent: 0;
+	color: #0000FF;
+	font-size: 14px;
+}
+.tips-box-n-b a:hover {
+    /*background: url("../images/closehover.png") no-repeat scroll 0 0 transparent !important;*/
+}
+.login_guanbi {float:right;cursor: pointer;color:#06c;width: 2em; text-align: center;margin-right: 20px;}
+.tips-box-n-n {padding: 10px;background-color: #FFF;overflow:hidden;}
+.tips-box-n-n-n {padding: 15px 20px 15px 20px;}
+.tips-box-n-n-n p{line-height:24px;}
+
+.tips-step1 {font-size: 15px;height: 46px;line-height: 46px;text-align: center;}
+.tips-step2 {font-size: 14px;height: 46px;line-height: 46px;text-align: center;}
+.tips-step1 a {
+    background: url("../images/ann.png") no-repeat scroll 0 0 transparent !important;
+    color: #FFFFFF !important;
+    display: block !important;
+    font-family: "微软雅黑" !important;
+    height: 36px;
+    line-height: 36px !important;
+    margin:auto;
+    text-align: center !important;
+    width: 120px !important;
+}
+.tips-step1 a:hover {
+    background: url("../images/annhover.png") no-repeat scroll 0 0 transparent !important;
+}
+
+/*弹出框锁屏样式和弹出框样式*/
+.div_overlay {
+	display: none;
+	position: fixed;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	-moz-opacity: 0.5;
+	background-color: #000;
+	opacity: .50;
+	filter: alpha(opacity = 50);
+	z-index: 9000;
+}
+
+.disableClass {
+	background: #F0F0F0 none repeat scroll 0 0;
+}
+.enableClass {
+	background: #e83740 none repeat scroll 0 0;
+}

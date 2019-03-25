@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--
+功能模块: 
+开发信息: 
+-->
+<sqlMap namespace="EFEI">
+	<typeAlias alias="Efei" type="com.uf88.admin.pojo.Efei"/>
+	<typeAlias alias="PageQuery" type="com.uf88.uf88core.PageQuery"/>
+	<typeAlias alias="Query" type="com.uf88.uf88core.Query"/>
+	
+	<sql id="wherecontation">
+		<dynamic>
+				 /*  */ 
+				 <isNotEmpty prepend="and" property="query.description">
+	  		 		e.DESCRIPTION = #query.description#
+				 </isNotEmpty>
+				 /*  */ 
+				 <isNotEmpty prepend="and" property="query.value">
+	  		 		e.VALUE = #query.value#
+				 </isNotEmpty>
+	  	</dynamic>
+	</sql>
+	
+	<sql id="selectcolumn">
+		<dynamic>
+			      e.ID	   AS	id	/*  */ 
+				 ,e.DESCRIPTION	   AS	description	/*  */ 
+				 ,e.VALUE	   AS	value	/*  */ 
+	  	</dynamic>
+	</sql>
+	
+	<!--
+	方法名称: insert
+	调用路径: EFEI.insert
+	开发信息: 
+	处理信息: 保存记录
+	-->
+ 	<insert id="insert" parameterClass="Efei" >
+	 	INSERT  INTO  EFEI   /*  */ 
+					(		
+					 ID		/*  */ 
+					,DESCRIPTION		/*  */ 
+					,VALUE		/*  */ 
+					)
+			values (
+					 #id#		/*  */ 
+				  	,#description#		/*  */ 
+				  	,#value#		/*  */ 
+					)
+			  
+	</insert>
+	
+	
+	<!--
+	方法名称: update
+	调用路径: EFEI.update
+	开发信息: 
+	处理信息: 修改记录
+	-->
+ 	<update id="update" parameterClass="Efei" >
+		UPDATE   EFEI  	/*  */ 
+	  		<dynamic prepend=" SET ">
+					 /*  */ 
+					 <isNotNull  property="description" prepend=",">
+	    		 		DESCRIPTION = #description#
+					 </isNotNull>
+					 /*  */ 
+					 <isNotNull  property="value" prepend=",">
+	    		 		VALUE = #value#
+					 </isNotNull>
+	  	  </dynamic>
+				WHERE
+	  	 		 		ID = #id#		/*  */ 
+	</update>
+
+	
+	<!--
+	方法名称: deleteByPriKey
+	调用路径: EFEI.deleteByPriKey
+	开发信息: 
+	处理信息: 删除记录
+	-->
+	<delete id="deleteByPriKey" parameterClass="Efei">
+		DELETE 	FROM EFEI 	/*  */ 
+		WHERE 
+			ID = #id#		/*  */ 
+	</delete>
+	
+	<!--
+	方法名称: findByPriKey
+	调用路径: EFEI.findByPriKey
+	开发信息: 
+	处理信息: 根据主键查询记录
+	-->
+	<select id="findByPriKey" parameterClass="Efei"  resultClass="Efei">
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   FROM   EFEI      AS e      /*  */ 
+		   WHERE
+				ID = #id#		/*  */ 
+	</select>
+	
+	<!--
+	方法名称: getPagenationList
+	调用路径: EFEI.getPagenationList
+	开发信息: 
+	处理信息: 分页查询记录
+	-->
+	<select id="getPagenationList" parameterClass="PageQuery"  resultClass="Efei">
+			<!-- 分页条 -->
+		   <include refid="uf88.commons.pageBegin"/>
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   FROM   EFEI      AS e      /*  */ 
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+		<!-- 分页条 -->
+		<include refid="uf88.commons.pageEnd"/>
+			
+	</select>
+	
+	
+	<!--
+	方法名称: getItemCount
+	调用路径: EFEI.getItemCount
+	开发信息: 
+	处理信息: 查询记录数
+	-->
+	<select id="getItemCount" parameterClass="PageQuery" resultClass="java.lang.Integer">
+		SELECT count(1)  FROM  EFEI  AS e	/*  */   
+		 WHERE 1=1
+		<include refid="wherecontation"/>
+	</select>
+	
+	
+	
+	<!--
+	方法名称: getAllList
+	调用路径: EFEI.getAllList
+	开发信息: 
+	处理信息: 查询所有的记录
+	-->
+	<select id="getAllList" parameterClass="Query"  resultClass="Efei">
+		   SELECT   
+           <include refid="selectcolumn"/>
+		   FROM   EFEI      AS e      /*  */ 
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+	</select>
+	
+	
+</sqlMap>

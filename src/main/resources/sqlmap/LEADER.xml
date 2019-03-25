@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--
+功能模块: 
+开发信息: 
+-->
+<sqlMap namespace="LEADER">
+	<typeAlias alias="Leader" type="com.uf88.admin.pojo.Leader"/>
+	<typeAlias alias="PageQuery" type="com.uf88.uf88core.PageQuery"/>
+	<typeAlias alias="Query" type="com.uf88.uf88core.Query"/>
+	
+	<sql id="wherecontation">
+		<dynamic>
+				 /*  */ 
+				 <isNotEmpty prepend="and" property="query.leaderpass">
+	  		 		l.LEADERPASS = #query.leaderpass#
+				 </isNotEmpty>
+	  	</dynamic>
+	</sql>
+	
+	<sql id="selectcolumn">
+		<dynamic>
+			      l.LEADERNAME	   AS	leadername	/*  */ 
+				 ,l.LEADERPASS	   AS	leaderpass	/*  */ 
+	  	</dynamic>
+	</sql>
+	
+	<!--
+	方法名称: insert
+	调用路径: LEADER.insert
+	开发信息: 
+	处理信息: 保存记录
+	-->
+ 	<insert id="insert" parameterClass="Leader" >
+	 	INSERT  INTO  LEADER   /*  */ 
+					(		
+					 LEADERNAME		/*  */ 
+					,LEADERPASS		/*  */ 
+					)
+			values (
+					 #leadername#		/*  */ 
+				  	,#leaderpass#		/*  */ 
+					)
+			 
+	</insert>
+	
+	
+	<!--
+	方法名称: update
+	调用路径: LEADER.update
+	开发信息: 
+	处理信息: 修改记录
+	-->
+ 	<update id="update" parameterClass="Leader" >
+		UPDATE   LEADER  	/*  */ 
+	  		<dynamic prepend=" SET ">
+					 /*  */ 
+					 <isNotNull  property="leaderpass" prepend=",">
+	    		 		LEADERPASS = #leaderpass#
+					 </isNotNull>
+	  	  </dynamic>
+				WHERE
+	  	 		 		LEADERNAME = #leadername#		/*  */ 
+	</update>
+
+	
+	<!--
+	方法名称: deleteByPriKey
+	调用路径: LEADER.deleteByPriKey
+	开发信息: 
+	处理信息: 删除记录
+	-->
+	<delete id="deleteByPriKey" parameterClass="Leader">
+		DELETE 	FROM LEADER 	/*  */ 
+		WHERE 
+			LEADERNAME = #leadername#		/*  */ 
+	</delete>
+	
+	<!--
+	方法名称: findByPriKey
+	调用路径: LEADER.findByPriKey
+	开发信息: 
+	处理信息: 根据主键查询记录
+	-->
+	<select id="findByPriKey" parameterClass="Leader"  resultClass="Leader">
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   FROM   LEADER      AS l      /*  */ 
+		   WHERE
+				LEADERNAME = #leadername#		/*  */ 
+	</select>
+	
+	<!--
+	方法名称: getPagenationList
+	调用路径: LEADER.getPagenationList
+	开发信息: 
+	处理信息: 分页查询记录
+	-->
+	<select id="getPagenationList" parameterClass="PageQuery"  resultClass="Leader">
+			<!-- 分页条 -->
+		   <include refid="uf88.commons.pageBegin"/>
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   FROM   LEADER      AS l      /*  */ 
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+		<!-- 分页条 -->
+		<include refid="uf88.commons.pageEnd"/>
+			
+	</select>
+	
+	
+	<!--
+	方法名称: getItemCount
+	调用路径: LEADER.getItemCount
+	开发信息: 
+	处理信息: 查询记录数
+	-->
+	<select id="getItemCount" parameterClass="PageQuery" resultClass="java.lang.Integer">
+		SELECT count(1)  FROM  LEADER  AS l	/*  */   
+		 WHERE 1=1
+		<include refid="wherecontation"/>
+	</select>
+	
+	
+	
+	<!--
+	方法名称: getAllList
+	调用路径: LEADER.getAllList
+	开发信息: 
+	处理信息: 查询所有的记录
+	-->
+	<select id="getAllList" parameterClass="Query"  resultClass="Leader">
+		   SELECT   
+           <include refid="selectcolumn"/>
+		   FROM   LEADER      AS l      /*  */ 
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+	</select>
+	
+	
+</sqlMap>

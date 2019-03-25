@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--
+功能模块: 
+开发信息: 
+-->
+<sqlMap namespace="CLASS_INFO">
+	<typeAlias alias="ClassInfo" type="com.uf88.admin.pojo.ClassInfo"/>
+	<typeAlias alias="PageQuery" type="com.uf88.uf88core.PageQuery"/>
+	<typeAlias alias="Query" type="com.uf88.uf88core.Query"/>
+	
+	<sql id="wherecontation">
+		<dynamic>
+	  	</dynamic>
+	</sql>
+	
+	<sql id="selectcolumn">
+		<dynamic>
+			      ci.CLASSNAME	   AS	classname	/*  */ 
+	  	</dynamic>
+	</sql>
+	
+	<!--
+	方法名称: insert
+	调用路径: CLASS_INFO.insert
+	开发信息: 
+	处理信息: 保存记录
+	-->
+ 	<insert id="insert" parameterClass="ClassInfo" >
+	 	INSERT  INTO  CLASS_INFO   /*  */ 
+					(		
+					 CLASSNAME		/*  */ 
+					)
+			values (
+					 #classname#		/*  */ 
+					)
+			  
+	</insert>
+	
+	
+	<!--
+	方法名称: update
+	调用路径: CLASS_INFO.update
+	开发信息: 
+	处理信息: 修改记录
+	-->
+ 	<update id="update" parameterClass="ClassInfo" >
+		UPDATE   CLASS_INFO  	/*  */ 
+	  		<dynamic prepend=" SET ">
+	  	  </dynamic>
+				WHERE
+	  	 		 		CLASSNAME = #classname#		/*  */ 
+	</update>
+
+	
+	<!--
+	方法名称: deleteByPriKey
+	调用路径: CLASS_INFO.deleteByPriKey
+	开发信息: 
+	处理信息: 删除记录
+	-->
+	<delete id="deleteByPriKey" parameterClass="ClassInfo">
+		DELETE 	FROM CLASS_INFO 	/*  */ 
+		WHERE 
+			CLASSNAME = #classname#		/*  */ 
+	</delete>
+	
+	<!--
+	方法名称: findByPriKey
+	调用路径: CLASS_INFO.findByPriKey
+	开发信息: 
+	处理信息: 根据主键查询记录
+	-->
+	<select id="findByPriKey" parameterClass="ClassInfo"  resultClass="ClassInfo">
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   FROM   CLASS_INFO      AS ci      /*  */ 
+		   WHERE
+				CLASSNAME = #classname#		/*  */ 
+	</select>
+	
+	<!--
+	方法名称: getPagenationList
+	调用路径: CLASS_INFO.getPagenationList
+	开发信息: 
+	处理信息: 分页查询记录
+	-->
+	<select id="getPagenationList" parameterClass="PageQuery"  resultClass="ClassInfo">
+			<!-- 分页条 -->
+		   <include refid="uf88.commons.pageBegin"/>
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   FROM   CLASS_INFO      AS ci      /*  */ 
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+		<!-- 分页条 -->
+		<include refid="uf88.commons.pageEnd"/>
+			
+	</select>
+	
+	
+	<!--
+	方法名称: getItemCount
+	调用路径: CLASS_INFO.getItemCount
+	开发信息: 
+	处理信息: 查询记录数
+	-->
+	<select id="getItemCount" parameterClass="PageQuery" resultClass="java.lang.Integer">
+		SELECT count(1)  FROM  CLASS_INFO  AS ci	/*  */   
+		 WHERE 1=1
+		<include refid="wherecontation"/>
+	</select>
+	
+	
+	
+	<!--
+	方法名称: getAllList
+	调用路径: CLASS_INFO.getAllList
+	开发信息: 
+	处理信息: 查询所有的记录
+	-->
+	<select id="getAllList" parameterClass="Query"  resultClass="ClassInfo">
+		   SELECT   
+           <include refid="selectcolumn"/>
+		   FROM   CLASS_INFO      AS ci      /*  */ 
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+	</select>
+	
+	
+</sqlMap>

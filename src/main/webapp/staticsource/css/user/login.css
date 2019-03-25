@@ -1,0 +1,91 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*公共样式表*/
+body,ul,ol,li,h1,h2,h3,h4,h5,h6,form,fieldset,dl,dt,dd,table,td,div,p,a{
+	margin:0;
+	padding:0;
+	border:0;
+	font-size:12px;
+	font-weight: normal;
+}
+img{ border:none; vertical-align: middle;}
+body{ font-size:12px;font-family:"微软雅黑";color:#565656;margin:0px auto;}
+img{border:0px; margin:0;vertical-align: middle; }
+input{vertical-align: middle;}
+ul,ol,li,li a{list-style-type:none; text-decoration:none; color:#000;}
+a{color:#000;text-decoration:none; outline: none;}
+a:link,a:visited{color:#000;text-decoration:none;}
+a:hover{color:#333;text-decoration:none; }
+input{font-size:12px;color:#464646;height:14px;margin:0;padding:0;}
+select{border:1px solid #7F9DB9; font-size:12px;color:#464646;}
+.clear{ clear:both; overflow:hidden; height:0;}
+ 
+ #wrap{background:url(../../images/login/background.jpg) center top no-repeat;margin:0 auto;}
+ /*	--头部 start--*/
+#top{height:97px;margin:auto;overflow:hidden; background: url('../../images/login/top.png') no-repeat center; }
+.top{width:1000px;height:97px; position:relative;margin:0 auto;background: url('../../images/login/logo.png') no-repeat center; }
+.logo{width:192px;height:52px;padding-top:13px;}
+ /*	--头部 end--*/
+ /*--中部 start--*/
+.login_main2{ overflow:hidden;height:404px;}
+.login_main2 .login_box{
+	width: 580px;
+	height: 336px;
+	margin: 15px auto;
+	background: url("../../images/login/login_box.png") center no-repeat;
+}
+
+.login_ul{padding-top:90px;width: 300px; margin: 0px auto;padding-left: 350px;}
+.login_ul li{height: 50px;width: 310px;}
+.login_ul li.name_input{
+	background: url('../../images/login/input_name.png') center no-repeat;
+}
+.login_ul li.pass_input{
+	background: url('../../images/login/input_pass.png') center no-repeat;
+}
+
+.login_ul li.line{
+	height: 10px;
+}
+.login_ul li.pad28{padding-top: 10px; }
+.login_ul li.pad28 a.loginSubmit{
+	width: 300px;
+	height: 36px;
+	line-height:36px;
+	text-align: center;
+	display:block;
+	font-size: 18px;
+	color: #ffffff;
+	/*background: #e83740;*/
+	border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	margin: 0px auto;
+}
+.login_ul li .input{ height:36px; border:none;width:248px;line-height:36px;margin:7px 0px 0px 54px; background: #FFFFFF;    text-indent: 10px;}
+ /*--中部 end--*/
+/*--底部 start--*/
+#bottom{width:100%;height:120px;margin:auto;overflow:hidden;background: url('../../images/login/bottom.png') no-repeat center;font-size: 14px;}
+.qtseaver{height:62px;width:1000px;margin:0 auto;overflow:hidden}
+.qtseaver p.bottom_tel{width:222px;height:37px;background:url('../../images/login/con_tel.png') no-repeat center bottom;float:left;    margin-top: 14px;}
+.qtseaver p.connect{padding-top:36px;float:right;font-size: 14px;padding-right: 50px;}
+.qtseaver p.connect .con_le{
+	padding-right: 30px;
+}
+
+.bottom{width:1000px;height:54px;margin:4px auto 0px auto;font-size:14px;text-align:center;line-height:22px;}
+.bottom .left{
+	font-size: 14px;
+	float: left;
+	padding-top: 20px;
+}
+.bottom .right{
+	float: right;
+padding-top: 12px;
+}
+.bottom .right img{
+	margin-left: 50px;
+}
+.bottom a{color:#939393;}
+/*--底部 end--*/

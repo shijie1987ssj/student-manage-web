@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--
+功能模块: 
+开发信息: 
+-->
+<sqlMap namespace="ADMIN">
+	<typeAlias alias="Admin" type="com.uf88.admin.pojo.Admin"/>
+	<typeAlias alias="PageQuery" type="com.uf88.uf88core.PageQuery"/>
+	<typeAlias alias="Query" type="com.uf88.uf88core.Query"/>
+	
+	<sql id="wherecontation">
+		<dynamic>
+				 /*  */ 
+				 <isNotEmpty prepend="and" property="query.adminpassword">
+	  		 		a.ADMINPASSWORD = #query.adminpassword#
+				 </isNotEmpty>
+	  	</dynamic>
+	</sql>
+	
+	<sql id="selectcolumn">
+		<dynamic>
+			      a.ADMINNAME	   AS	adminname	/*  */ 
+				 ,a.ADMINPASSWORD	   AS	adminpassword	/*  */ 
+	  	</dynamic>
+	</sql>
+	
+	<!--
+	方法名称: insert
+	调用路径: ADMIN.insert
+	开发信息: 
+	处理信息: 保存记录
+	-->
+ 	<insert id="insert" parameterClass="Admin" >
+	 	INSERT  INTO  ADMIN   /*  */ 
+					(		
+					 ADMINNAME		/*  */ 
+					,ADMINPASSWORD		/*  */ 
+					)
+			values (
+					 #adminname#		/*  */ 
+				  	,#adminpassword#		/*  */ 
+					)
+			   
+	</insert>
+	
+	
+	<!--
+	方法名称: update
+	调用路径: ADMIN.update
+	开发信息: 
+	处理信息: 修改记录
+	-->
+ 	<update id="update" parameterClass="Admin" >
+		UPDATE   ADMIN  	/*  */ 
+	  		<dynamic prepend=" SET ">
+					 /*  */ 
+					 <isNotNull  property="adminpassword" prepend=",">
+	    		 		ADMINPASSWORD = #adminpassword#
+					 </isNotNull>
+	  	  </dynamic>
+				WHERE
+	  	 		 		ADMINNAME = #adminname#		/*  */ 
+	</update>
+
+	
+	<!--
+	方法名称: deleteByPriKey
+	调用路径: ADMIN.deleteByPriKey
+	开发信息: 
+	处理信息: 删除记录
+	-->
+	<delete id="deleteByPriKey" parameterClass="Admin">
+		DELETE 	FROM ADMIN 	/*  */ 
+		WHERE 
+			ADMINNAME = #adminname#		/*  */ 
+	</delete>
+	
+	<!--
+	方法名称: findByPriKey
+	调用路径: ADMIN.findByPriKey
+	开发信息: 
+	处理信息: 根据主键查询记录
+	-->
+	<select id="findByPriKey" parameterClass="Admin"  resultClass="Admin">
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   FROM   ADMIN      AS a      /*  */ 
+		   WHERE
+				ADMINNAME = #adminname#		/*  */ 
+	</select>
+	
+	<!--
+	方法名称: getPagenationList
+	调用路径: ADMIN.getPagenationList
+	开发信息: 
+	处理信息: 分页查询记录
+	-->
+	<select id="getPagenationList" parameterClass="PageQuery"  resultClass="Admin">
+			<!-- 分页条 -->
+		   <include refid="uf88.commons.pageBegin"/>
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   FROM   ADMIN      AS a      /*  */ 
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+		<!-- 分页条 -->
+		<include refid="uf88.commons.pageEnd"/>
+			
+	</select>
+	
+	
+	<!--
+	方法名称: getItemCount
+	调用路径: ADMIN.getItemCount
+	开发信息: 
+	处理信息: 查询记录数
+	-->
+	<select id="getItemCount" parameterClass="PageQuery" resultClass="java.lang.Integer">
+		SELECT count(1)  FROM  ADMIN  AS a	/*  */   
+		 WHERE 1=1
+		<include refid="wherecontation"/>
+	</select>
+	
+	
+	
+	<!--
+	方法名称: getAllList
+	调用路径: ADMIN.getAllList
+	开发信息: 
+	处理信息: 查询所有的记录
+	-->
+	<select id="getAllList" parameterClass="Query"  resultClass="Admin">
+		   SELECT   
+           <include refid="selectcolumn"/>
+		   FROM   ADMIN      AS a      /*  */ 
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+	</select>
+	
+	
+</sqlMap>

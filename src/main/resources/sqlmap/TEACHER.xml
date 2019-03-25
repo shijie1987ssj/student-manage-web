@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--
+功能模块: 
+开发信息: 
+-->
+<sqlMap namespace="TEACHER">
+	<typeAlias alias="Teacher" type="com.uf88.admin.pojo.Teacher"/>
+	<typeAlias alias="PageQuery" type="com.uf88.uf88core.PageQuery"/>
+	<typeAlias alias="Query" type="com.uf88.uf88core.Query"/>
+	
+	<sql id="wherecontation">
+		<dynamic>
+				/* 学生编号*/ 
+				 <isNotEmpty prepend="and" property="query.teacheridStr">
+	  		 		(
+	  		 			t.teacherid like CONCAT('%',#query.teacheridStr#,'%')
+	  		 			or
+	  		 			t.TEACHERNAME  like CONCAT('%',#query.teacheridStr#,'%')
+	  		 		)
+				 </isNotEmpty>
+				 /* 教师姓名 */ 
+				 <isNotEmpty prepend="and" property="query.teachername">
+	  		 		t.TEACHERNAME = #query.teachername#
+				 </isNotEmpty>
+				 /* 年龄 */ 
+				 <isNotEmpty prepend="and" property="query.teacherage">
+	  		 		t.TEACHERAGE = #query.teacherage#
+				 </isNotEmpty>
+				 /* 性别 */ 
+				 <isNotEmpty prepend="and" property="query.teachersex">
+	  		 		t.TEACHERSEX = #query.teachersex#
+				 </isNotEmpty>
+				 /* 密码 */ 
+				 <isNotEmpty prepend="and" property="query.teacherpass">
+	  		 		t.TEACHERPASS = #query.teacherpass#
+				 </isNotEmpty>
+				 /* 授课班级，外键 */ 
+				 <isNotEmpty prepend="and" property="query.teacherclass">
+	  		 		t.TEACHERCLASS = #query.teacherclass#
+				 </isNotEmpty>
+				 /* 所在院系，外键 */ 
+				 <isNotEmpty prepend="and" property="query.teacherclub">
+	  		 		t.TEACHERCLUB = #query.teacherclub#
+				 </isNotEmpty>
+				 /* 所带课程，外键 */ 
+				 <isNotEmpty prepend="and" property="query.subject">
+	  		 		t.SUBJECT = #query.subject#
+				 </isNotEmpty>
+				 /* 毕业院校 */ 
+				 <isNotEmpty prepend="and" property="query.school">
+	  		 		t.SCHOOL = #query.school#
+				 </isNotEmpty>
+				 /* 教师邮箱 */ 
+				 <isNotEmpty prepend="and" property="query.teacheremail">
+	  		 		t.TEACHEREMAIL = #query.teacheremail#
+				 </isNotEmpty>
+				 /* 是否评价 */ 
+				 <isNotEmpty prepend="and" property="query.pingjia">
+	  		 		t.PINGJIA = #query.pingjia#
+				 </isNotEmpty>
+	  	</dynamic>
+	</sql>
+	
+	<sql id="selectcolumn">
+		<dynamic>
+			      t.TEACHERID	   AS	teacherid	/* 教师编号 */ 
+				 ,t.TEACHERNAME	   AS	teachername	/* 教师姓名 */ 
+				 ,t.TEACHERAGE	   AS	teacherage	/* 年龄 */ 
+				 ,t.TEACHERSEX	   AS	teachersex	/* 性别 */ 
+				 ,t.TEACHERPASS	   AS	teacherpass	/* 密码 */ 
+				 ,t.TEACHERCLASS	   AS	teacherclass	/* 授课班级，外键 */ 
+				 ,t.TEACHERCLUB	   AS	teacherclub	/* 所在院系，外键 */ 
+				 ,t.SUBJECT	   AS	subject	/* 所带课程，外键 */ 
+				 ,t.SCHOOL	   AS	school	/* 毕业院校 */ 
+				 ,t.TEACHEREMAIL	   AS	teacheremail	/* 教师邮箱 */ 
+				 ,t.PINGJIA	   AS	pingjia	/* 是否评价 */ 
+	  	</dynamic>
+	</sql>
+	
+	<!--
+	方法名称: insert
+	调用路径: TEACHER.insert
+	开发信息: 
+	处理信息: 保存记录
+	-->
+ 	<insert id="insert" parameterClass="Teacher" >
+	 	INSERT  INTO  TEACHER   /*  */ 
+					(		
+					 TEACHERID		/* 教师编号 */ 
+					,TEACHERNAME		/* 教师姓名 */ 
+					,TEACHERAGE		/* 年龄 */ 
+					,TEACHERSEX		/* 性别 */ 
+					,TEACHERPASS		/* 密码 */ 
+					,TEACHERCLASS		/* 授课班级，外键 */ 
+					,TEACHERCLUB		/* 所在院系，外键 */ 
+					,SUBJECT		/* 所带课程，外键 */ 
+					,SCHOOL		/* 毕业院校 */ 
+					,TEACHEREMAIL		/* 教师邮箱 */ 
+					,PINGJIA		/* 是否评价 */ 
+					)
+			values (
+					 #teacherid#		/* 教师编号 */ 
+				  	,#teachername#		/* 教师姓名 */ 
+				  	,#teacherage#		/* 年龄 */ 
+				  	,#teachersex#		/* 性别 */ 
+				  	,#teacherpass#		/* 密码 */ 
+				  	,#teacherclass#		/* 授课班级，外键 */ 
+				  	,#teacherclub#		/* 所在院系，外键 */ 
+				  	,#subject#		/* 所带课程，外键 */ 
+				  	,#school#		/* 毕业院校 */ 
+				  	,#teacheremail#		/* 教师邮箱 */ 
+				  	,#pingjia#		/* 是否评价 */ 
+					)   
+	</insert>
+	
+	
+	<!--
+	方法名称: update
+	调用路径: TEACHER.update
+	开发信息: 
+	处理信息: 修改记录
+	-->
+ 	<update id="update" parameterClass="Teacher" >
+		UPDATE   TEACHER  	/*  */ 
+	  		<dynamic prepend=" SET ">
+					 /* 教师姓名 */ 
+					 <isNotNull  property="teachername" prepend=",">
+	    		 		TEACHERNAME = #teachername#
+					 </isNotNull>
+					 /* 年龄 */ 
+					 <isNotNull  property="teacherage" prepend=",">
+	    		 		TEACHERAGE = #teacherage#
+					 </isNotNull>
+					 /* 性别 */ 
+					 <isNotNull  property="teachersex" prepend=",">
+	    		 		TEACHERSEX = #teachersex#
+					 </isNotNull>
+					 /* 密码 */ 
+					 <isNotNull  property="teacherpass" prepend=",">
+	    		 		TEACHERPASS = #teacherpass#
+					 </isNotNull>
+					 /* 授课班级，外键 */ 
+					 <isNotNull  property="teacherclass" prepend=",">
+	    		 		TEACHERCLASS = #teacherclass#
+					 </isNotNull>
+					 /* 所在院系，外键 */ 
+					 <isNotNull  property="teacherclub" prepend=",">
+	    		 		TEACHERCLUB = #teacherclub#
+					 </isNotNull>
+					 /* 所带课程，外键 */ 
+					 <isNotNull  property="subject" prepend=",">
+	    		 		SUBJECT = #subject#
+					 </isNotNull>
+					 /* 毕业院校 */ 
+					 <isNotNull  property="school" prepend=",">
+	    		 		SCHOOL = #school#
+					 </isNotNull>
+					 /* 教师邮箱 */ 
+					 <isNotNull  property="teacheremail" prepend=",">
+	    		 		TEACHEREMAIL = #teacheremail#
+					 </isNotNull>
+					 /* 是否评价 */ 
+					 <isNotNull  property="pingjia" prepend=",">
+	    		 		PINGJIA = #pingjia#
+					 </isNotNull>
+	  	  </dynamic>
+				WHERE
+	  	 		 		TEACHERID = #teacherid#		/* 教师编号 */ 
+	</update>
+
+	
+	<!--
+	方法名称: deleteByPriKey
+	调用路径: TEACHER.deleteByPriKey
+	开发信息: 
+	处理信息: 删除记录
+	-->
+	<delete id="deleteByPriKey" parameterClass="Teacher">
+		DELETE 	FROM TEACHER 	/*  */ 
+		WHERE 
+			TEACHERID = #teacherid#		/* 教师编号 */ 
+	</delete>
+	
+	<!--
+	方法名称: findByPriKey
+	调用路径: TEACHER.findByPriKey
+	开发信息: 
+	处理信息: 根据主键查询记录
+	-->
+	<select id="findByPriKey" parameterClass="Teacher"  resultClass="Teacher">
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   FROM   TEACHER      AS t      /*  */ 
+		   WHERE
+				TEACHERID = #teacherid#		/* 教师编号 */ 
+	</select>
+	
+	<!--
+	方法名称: getPagenationList
+	调用路径: TEACHER.getPagenationList
+	开发信息: 
+	处理信息: 分页查询记录
+	-->
+	<select id="getPagenationList" parameterClass="PageQuery"  resultClass="Teacher">
+			<!-- 分页条 -->
+		   <include refid="uf88.commons.pageBegin"/>
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   FROM   TEACHER      AS t      /*  */ 
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+		<!-- 分页条 -->
+		<include refid="uf88.commons.pageEnd"/>
+			
+	</select>
+	
+	
+	<!--
+	方法名称: getItemCount
+	调用路径: TEACHER.getItemCount
+	开发信息: 
+	处理信息: 查询记录数
+	-->
+	<select id="getItemCount" parameterClass="PageQuery" resultClass="java.lang.Integer">
+		SELECT count(1)  FROM  TEACHER  AS t	/*  */   
+		 WHERE 1=1
+		<include refid="wherecontation"/>
+	</select>
+	
+	
+	
+	<!--
+	方法名称: getAllList
+	调用路径: TEACHER.getAllList
+	开发信息: 
+	处理信息: 查询所有的记录
+	-->
+	<select id="getAllList" parameterClass="Query"  resultClass="Teacher">
+		   SELECT   
+           <include refid="selectcolumn"/>
+		   FROM   TEACHER      AS t      /*  */ 
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+	</select>
+	
+	
+</sqlMap>

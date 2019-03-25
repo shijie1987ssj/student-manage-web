@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<bean id="assertSettleJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+		p:targetObject-ref="assertSettleJob" p:targetMethod="executeSettle"
+		p:concurrent="false" />
+
+
+	<bean id="assertSettleJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"
+		p:jobDetail-ref="assertSettleJobDetail" p:cronExpression="0 */1 * * * ?" />
+
+	<!-- 每隔5秒执行一次：*/5 * * * * ? 每隔1分钟执行一次：0 */1 * * * ? 每天23点执行一次：0 0 23 * * 
+		? 每天凌晨1点执行一次：0 0 1 * * ? 每月1号凌晨1点执行一次：0 0 1 1 * ? 每月最后一天23点执行一次：0 0 23 L 
+		* ? 每周星期天凌晨1点实行一次：0 0 1 ? * L -->
+
+	<bean id="memberFreeJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+		p:targetObject-ref="memberFreeJob" p:targetMethod="executeMemberFree"
+		p:concurrent="false" />
+
+	<bean id="memberFreeJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"
+		p:jobDetail-ref="memberFreeJobDetail" p:cronExpression="0 0 */1 * * ?" />
+	
+	<!-- 自动更新竞拍  -->
+	<bean id="updateAuctionJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+		p:targetObject-ref="updateAuctionJob" p:targetMethod="executeUpdateAuction"
+		p:concurrent="false" /> 
+
+	<bean id="updateAuctionJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"
+		p:jobDetail-ref="updateAuctionJobDetail" p:cronExpression="0 */3 * * * ?" />
+	
+	<!-- 自动摘牌  -->
+	<bean id="autoOffListingJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+		p:targetObject-ref="autoOffListingJob" p:targetMethod="executeAutoOffListing"
+		p:concurrent="false" /> 
+
+	<bean id="autoOffListingTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"
+		p:jobDetail-ref="autoOffListingJobDetail" p:cronExpression="01 0 * * * ?" />
+	
+	<!-- 自动挂牌  -->
+	<bean id="autoListingJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+		p:targetObject-ref="autoListingJob" p:targetMethod="executeAutoListing"
+		p:concurrent="false" />	
+	
+	<bean id="autoListingTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"
+		p:jobDetail-ref="autoListingJobDetail" p:cronExpression="20 */30 * * * ?" />
+	
+	<!-- 自动刷新项目缓存  -->
+	<bean id="assertCacheJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+		p:targetObject-ref="cacheJob" p:targetMethod="executeAsset"
+		p:concurrent="false" />
+	
+	<bean id="assertCacheJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"
+		p:jobDetail-ref="assertCacheJobDetail" p:cronExpression="0 */10 * * * ?" />
+	 
+	 <!-- 自动刷新新闻公告缓存  -->
+<!-- 	<bean id="newsCacheJobDetail" -->
+<!-- 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean" -->
+<!-- 		p:targetObject-ref="cacheJob" p:targetMethod="executeNews" -->
+<!-- 		p:concurrent="false" /> -->
+	
+<!-- 	<bean id="newsCacheJobTrigger"-->
+<!--		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"-->
+<!--		p:jobDetail-ref="newsCacheJobDetail" p:cronExpression="0 */10 * * * ?" /> -->
+	
+	<bean id="autoCheckCashDepositJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+		p:targetObject-ref="autoCheckCashDepositJob" p:targetMethod="executeAutoCheckCashDeposit"
+		p:concurrent="false" />
+	
+	<bean id="autoCheckCashDepositTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"
+		p:jobDetail-ref="autoCheckCashDepositJobDetail" p:cronExpression="0 */1 * * * ?" />
+	
+	<!-- 自动刷新日报表 -->
+	<bean id="virtualAccountBalanceJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+		p:targetObject-ref="virtualAccountBalanceJob" p:targetMethod="executeTask"
+		p:concurrent="false" />
+	
+	<bean id="virtualAccountBalanceTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"
+		p:jobDetail-ref="virtualAccountBalanceJobDetail" p:cronExpression="0 33 17 * * ?" />
+	
+	<!-- 自动发送邮件提醒定时器 -->
+	<bean id="autoEmailJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+		p:targetObject-ref="autoEmailJob" p:targetMethod="executeTask"
+		p:concurrent="false" />
+	
+	<bean id="autoEmailTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"
+		p:jobDetail-ref="autoEmailJobDetail" p:cronExpression="0 */2 * * * ?" />
+	
+	<!-- 自动同步AMC
+	<bean id="aMCLoanInitJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+		p:targetObject-ref="aMCLoanInitJob" p:targetMethod="executeAMCLoanInit"
+		p:concurrent="false" /> 
+
+	<bean id="aMCLoanInitJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"
+		p:jobDetail-ref="aMCLoanInitJobDetail" p:cronExpression="0 */5 * * * ?" />
+	 -->
+	
+	<!-- 监控：moniter 端口检测任务 -->
+	<bean id="monitorTaskDoJobDetail"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
+		p:targetObject-ref="monitorTaskDo" p:targetMethod="executePortMonitor"
+		p:concurrent="false" /> 
+
+	<bean id="monitorTaskDoJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"
+		p:jobDetail-ref="monitorTaskDoJobDetail" p:cronExpression="0/20 * * * * ?" />
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				 
+			</list>
+		</property>
+	</bean>
+
+</beans>

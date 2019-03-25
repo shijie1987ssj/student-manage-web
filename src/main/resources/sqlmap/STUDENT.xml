@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--
+功能模块: 
+开发信息: 
+-->
+<sqlMap namespace="STUDENT">
+	<typeAlias alias="Student" type="com.uf88.admin.pojo.Student"/>
+	<typeAlias alias="PageQuery" type="com.uf88.uf88core.PageQuery"/>
+	<typeAlias alias="Query" type="com.uf88.uf88core.Query"/>
+	
+	<sql id="wherecontation">
+		<dynamic>
+				/* 学生编号*/ 
+				 <isNotEmpty prepend="and" property="query.stuid">
+	  		 		s.stuid = #query.stuid#
+				 </isNotEmpty>
+				 /* 学生编号*/ 
+				 <isNotEmpty prepend="and" property="query.stuidStr">
+	  		 		(
+	  		 			s.stuid like CONCAT('%',#query.stuidStr#,'%')
+	  		 			or
+	  		 			s.STUNAME  like CONCAT('%',#query.stuidStr#,'%')
+	  		 		)
+				 </isNotEmpty>
+				 /* 学生姓名 */ 
+				 <isNotEmpty prepend="and" property="query.stuname">
+	  		 		s.STUNAME  = #query.stuname#
+				 </isNotEmpty>
+				 /* 密码 */ 
+				 <isNotEmpty prepend="and" property="query.stupass">
+	  		 		s.STUPASS = #query.stupass#
+				 </isNotEmpty>
+				 /* 年龄 */ 
+				 <isNotEmpty prepend="and" property="query.stuage">
+	  		 		s.STUAGE = #query.stuage#
+				 </isNotEmpty>
+				 /* 性别 */ 
+				 <isNotEmpty prepend="and" property="query.stusex">
+	  		 		s.STUSEX = #query.stusex#
+				 </isNotEmpty>
+				 /* 所在班级，外键 */ 
+				 <isNotEmpty prepend="and" property="query.stuclass">
+	  		 		s.STUCLASS = #query.stuclass#
+				 </isNotEmpty>
+				 /* 所在院系，外键 */ 
+				 <isNotEmpty prepend="and" property="query.stuclub">
+	  		 		s.STUCLUB = #query.stuclub#
+				 </isNotEmpty>
+				 /* QQ号 */ 
+				 <isNotEmpty prepend="and" property="query.stuqq">
+	  		 		s.STUQQ = #query.stuqq#
+				 </isNotEmpty>
+				 /* 电话号码 */ 
+				 <isNotEmpty prepend="and" property="query.stutelephone">
+	  		 		s.STUTELEPHONE = #query.stutelephone#
+				 </isNotEmpty>
+				 /* 邮箱 */ 
+				 <isNotEmpty prepend="and" property="query.stuemail">
+	  		 		s.STUEMAIL = #query.stuemail#
+				 </isNotEmpty>
+				 /* 所在年级，外键 */ 
+				 <isNotEmpty prepend="and" property="query.stugrade">
+	  		 		s.STUGRADE = #query.stugrade#
+				 </isNotEmpty>
+	  	</dynamic>
+	</sql>
+	
+	<sql id="selectcolumn">
+		<dynamic>
+			      s.STUID	   AS	stuid	/* 学生编号，主键 */ 
+				 ,s.STUNAME	   AS	stuname	/* 学生姓名 */ 
+				 ,s.STUPASS	   AS	stupass	/* 密码 */ 
+				 ,s.STUAGE	   AS	stuage	/* 年龄 */ 
+				 ,s.STUSEX	   AS	stusex	/* 性别 */ 
+				 ,s.STUCLASS	   AS	stuclass	/* 所在班级，外键 */ 
+				 ,s.STUCLUB	   AS	stuclub	/* 所在院系，外键 */ 
+				 ,s.STUQQ	   AS	stuqq	/* QQ号 */ 
+				 ,s.STUTELEPHONE	   AS	stutelephone	/* 电话号码 */ 
+				 ,s.STUEMAIL	   AS	stuemail	/* 邮箱 */ 
+				 ,s.STUGRADE	   AS	stugrade	/* 所在年级，外键 */ 
+	  	</dynamic>
+	</sql>
+	
+	<!--
+	方法名称: insert
+	调用路径: STUDENT.insert
+	开发信息: 
+	处理信息: 保存记录
+	-->
+ 	<insert id="insert" parameterClass="Student" >
+	 	INSERT  INTO  STUDENT   /*  */ 
+					(		
+					 STUID		/* 学生编号，主键 */ 
+					,STUNAME		/* 学生姓名 */ 
+					,STUPASS		/* 密码 */ 
+					,STUAGE		/* 年龄 */ 
+					,STUSEX		/* 性别 */ 
+					,STUCLASS		/* 所在班级，外键 */ 
+					,STUCLUB		/* 所在院系，外键 */ 
+					,STUQQ		/* QQ号 */ 
+					,STUTELEPHONE		/* 电话号码 */ 
+					,STUEMAIL		/* 邮箱 */ 
+					,STUGRADE		/* 所在年级，外键 */ 
+					)
+			values (
+					 #stuid#		/* 学生编号，主键 */ 
+				  	,#stuname#		/* 学生姓名 */ 
+				  	,#stupass#		/* 密码 */ 
+				  	,#stuage#		/* 年龄 */ 
+				  	,#stusex#		/* 性别 */ 
+				  	,#stuclass#		/* 所在班级，外键 */ 
+				  	,#stuclub#		/* 所在院系，外键 */ 
+				  	,#stuqq#		/* QQ号 */ 
+				  	,#stutelephone#		/* 电话号码 */ 
+				  	,#stuemail#		/* 邮箱 */ 
+				  	,#stugrade#		/* 所在年级，外键 */ 
+					)
+			 
+	</insert>
+	
+	
+	<!--
+	方法名称: update
+	调用路径: STUDENT.update
+	开发信息: 
+	处理信息: 修改记录
+	-->
+ 	<update id="update" parameterClass="Student" >
+		UPDATE   STUDENT  	/*  */ 
+	  		<dynamic prepend=" SET ">
+					 /* 学生姓名 */ 
+					 <isNotNull  property="stuname" prepend=",">
+	    		 		STUNAME = #stuname#
+					 </isNotNull>
+					 /* 密码 */ 
+					 <isNotNull  property="stupass" prepend=",">
+	    		 		STUPASS = #stupass#
+					 </isNotNull>
+					 /* 年龄 */ 
+					 <isNotNull  property="stuage" prepend=",">
+	    		 		STUAGE = #stuage#
+					 </isNotNull>
+					 /* 性别 */ 
+					 <isNotNull  property="stusex" prepend=",">
+	    		 		STUSEX = #stusex#
+					 </isNotNull>
+					 /* 所在班级，外键 */ 
+					 <isNotNull  property="stuclass" prepend=",">
+	    		 		STUCLASS = #stuclass#
+					 </isNotNull>
+					 /* 所在院系，外键 */ 
+					 <isNotNull  property="stuclub" prepend=",">
+	    		 		STUCLUB = #stuclub#
+					 </isNotNull>
+					 /* QQ号 */ 
+					 <isNotNull  property="stuqq" prepend=",">
+	    		 		STUQQ = #stuqq#
+					 </isNotNull>
+					 /* 电话号码 */ 
+					 <isNotNull  property="stutelephone" prepend=",">
+	    		 		STUTELEPHONE = #stutelephone#
+					 </isNotNull>
+					 /* 邮箱 */ 
+					 <isNotNull  property="stuemail" prepend=",">
+	    		 		STUEMAIL = #stuemail#
+					 </isNotNull>
+					 /* 所在年级，外键 */ 
+					 <isNotNull  property="stugrade" prepend=",">
+	    		 		STUGRADE = #stugrade#
+					 </isNotNull>
+	  	  </dynamic>
+				WHERE
+	  	 		 		STUID = #stuid#		/* 学生编号，主键 */ 
+	</update>
+
+	
+	<!--
+	方法名称: deleteByPriKey
+	调用路径: STUDENT.deleteByPriKey
+	开发信息: 
+	处理信息: 删除记录
+	-->
+	<delete id="deleteByPriKey" parameterClass="Student">
+		DELETE 	FROM STUDENT 	/*  */ 
+		WHERE 
+			STUID = #stuid#		/* 学生编号，主键 */ 
+	</delete>
+	
+	<!--
+	方法名称: findByPriKey
+	调用路径: STUDENT.findByPriKey
+	开发信息: 
+	处理信息: 根据主键查询记录
+	-->
+	<select id="findByPriKey" parameterClass="Student"  resultClass="Student">
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   FROM   STUDENT      AS s      /*  */ 
+		   WHERE
+				STUID = #stuid#		/* 学生编号，主键 */ 
+	</select>
+	
+	<!--
+	方法名称: getPagenationList
+	调用路径: STUDENT.getPagenationList
+	开发信息: 
+	处理信息: 分页查询记录
+	-->
+	<select id="getPagenationList" parameterClass="PageQuery"  resultClass="Student">
+			<!-- 分页条 -->
+		   <include refid="uf88.commons.pageBegin"/>
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   FROM   STUDENT      AS s      /*  */ 
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+		<!-- 分页条 -->
+		<include refid="uf88.commons.pageEnd"/>
+			
+	</select>
+	
+	
+	<!--
+	方法名称: getItemCount
+	调用路径: STUDENT.getItemCount
+	开发信息: 
+	处理信息: 查询记录数
+	-->
+	<select id="getItemCount" parameterClass="PageQuery" resultClass="java.lang.Integer">
+		SELECT count(1)  FROM  STUDENT  AS s	/*  */   
+		 WHERE 1=1
+		<include refid="wherecontation"/>
+	</select>
+	
+	
+	
+	<!--
+	方法名称: getAllList
+	调用路径: STUDENT.getAllList
+	开发信息: 
+	处理信息: 查询所有的记录
+	-->
+	<select id="getAllList" parameterClass="Query"  resultClass="Student">
+		   SELECT   
+           <include refid="selectcolumn"/>
+		   FROM   STUDENT      AS s      /*  */ 
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+	</select>
+	
+	
+</sqlMap>

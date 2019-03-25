@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--
+功能模块: 
+开发信息: 
+-->
+<sqlMap namespace="CLUB">
+	<typeAlias alias="Club" type="com.uf88.admin.pojo.Club"/>
+	<typeAlias alias="PageQuery" type="com.uf88.uf88core.PageQuery"/>
+	<typeAlias alias="Query" type="com.uf88.uf88core.Query"/>
+	
+	<sql id="wherecontation">
+		<dynamic>
+	  	</dynamic>
+	</sql>
+	
+	<sql id="selectcolumn">
+		<dynamic>
+			      c.CLUBNAME	   AS	clubname	/*  */ 
+	  	</dynamic>
+	</sql>
+	
+	<!--
+	方法名称: insert
+	调用路径: CLUB.insert
+	开发信息: 
+	处理信息: 保存记录
+	-->
+ 	<insert id="insert" parameterClass="Club" >
+	 	INSERT  INTO  CLUB   /*  */ 
+					(		
+					 CLUBNAME		/*  */ 
+					)
+			values (
+					 #clubname#		/*  */ 
+					)
+			 
+	</insert>
+	
+	
+	<!--
+	方法名称: update
+	调用路径: CLUB.update
+	开发信息: 
+	处理信息: 修改记录
+	-->
+ 	<update id="update" parameterClass="Club" >
+		UPDATE   CLUB  	/*  */ 
+	  		<dynamic prepend=" SET ">
+	  	  </dynamic>
+				WHERE
+	  	 		 		CLUBNAME = #clubname#		/*  */ 
+	</update>
+
+	
+	<!--
+	方法名称: deleteByPriKey
+	调用路径: CLUB.deleteByPriKey
+	开发信息: 
+	处理信息: 删除记录
+	-->
+	<delete id="deleteByPriKey" parameterClass="Club">
+		DELETE 	FROM CLUB 	/*  */ 
+		WHERE 
+			CLUBNAME = #clubname#		/*  */ 
+	</delete>
+	
+	<!--
+	方法名称: findByPriKey
+	调用路径: CLUB.findByPriKey
+	开发信息: 
+	处理信息: 根据主键查询记录
+	-->
+	<select id="findByPriKey" parameterClass="Club"  resultClass="Club">
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   FROM   CLUB      AS c      /*  */ 
+		   WHERE
+				CLUBNAME = #clubname#		/*  */ 
+	</select>
+	
+	<!--
+	方法名称: getPagenationList
+	调用路径: CLUB.getPagenationList
+	开发信息: 
+	处理信息: 分页查询记录
+	-->
+	<select id="getPagenationList" parameterClass="PageQuery"  resultClass="Club">
+			<!-- 分页条 -->
+		   <include refid="uf88.commons.pageBegin"/>
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   FROM   CLUB      AS c      /*  */ 
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+		<!-- 分页条 -->
+		<include refid="uf88.commons.pageEnd"/>
+			
+	</select>
+	
+	
+	<!--
+	方法名称: getItemCount
+	调用路径: CLUB.getItemCount
+	开发信息: 
+	处理信息: 查询记录数
+	-->
+	<select id="getItemCount" parameterClass="PageQuery" resultClass="java.lang.Integer">
+		SELECT count(1)  FROM  CLUB  AS c	/*  */   
+		 WHERE 1=1
+		<include refid="wherecontation"/>
+	</select>
+	
+	
+	
+	<!--
+	方法名称: getAllList
+	调用路径: CLUB.getAllList
+	开发信息: 
+	处理信息: 查询所有的记录
+	-->
+	<select id="getAllList" parameterClass="Query"  resultClass="Club">
+		   SELECT   
+           <include refid="selectcolumn"/>
+		   FROM   CLUB      AS c      /*  */ 
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+	</select>
+	
+	
+</sqlMap>

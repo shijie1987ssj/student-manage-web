@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--
+功能模块: 
+开发信息: 
+-->
+<sqlMap namespace="STU_PINGJIA_TEACHER">
+	<typeAlias alias="StuPingjiaTeacher" type="com.uf88.admin.pojo.StuPingjiaTeacher"/>
+	<typeAlias alias="PageQuery" type="com.uf88.uf88core.PageQuery"/>
+	<typeAlias alias="Query" type="com.uf88.uf88core.Query"/>
+	
+	<sql id="wherecontation">
+		<dynamic>
+				 /* 学生编号，外键 */ 
+				 <isNotEmpty prepend="and" property="query.stuid">
+	  		 		spt.STUID = #query.stuid#
+				 </isNotEmpty>
+				 /* 教师编号，外键 */ 
+				 <isNotEmpty prepend="and" property="query.teacherid">
+	  		 		spt.TEACHERID = #query.teacherid#
+				 </isNotEmpty>
+				 /*  */ 
+				 <isNotEmpty prepend="and" property="query.pingjiascore">
+	  		 		spt.PINGJIASCORE = #query.pingjiascore#
+				 </isNotEmpty>
+	  	</dynamic>
+	</sql>
+	
+	<sql id="selectcolumn">
+		<dynamic>
+			      spt.ID	   AS	id	/* 编号 */ 
+				 ,spt.STUID	   AS	stuid	/* 学生编号，外键 */ 
+				 ,spt.TEACHERID	   AS	teacherid	/* 教师编号，外键 */ 
+				 ,spt.PINGJIASCORE	   AS	pingjiascore	/*  */ 
+	  	</dynamic>
+	</sql>
+	
+	<!--
+	方法名称: insert
+	调用路径: STU_PINGJIA_TEACHER.insert
+	开发信息: 
+	处理信息: 保存记录
+	-->
+ 	<insert id="insert" parameterClass="StuPingjiaTeacher" >
+	 	INSERT  INTO  STU_PINGJIA_TEACHER   /*  */ 
+					(		
+					 ID		/* 编号 */ 
+					,STUID		/* 学生编号，外键 */ 
+					,TEACHERID		/* 教师编号，外键 */ 
+					,PINGJIASCORE		/*  */ 
+					)
+			values (
+					 #id#		/* 编号 */ 
+				  	,#stuid#		/* 学生编号，外键 */ 
+				  	,#teacherid#		/* 教师编号，外键 */ 
+				  	,#pingjiascore#		/*  */ 
+					) 
+	</insert>
+	
+	
+	<!--
+	方法名称: update
+	调用路径: STU_PINGJIA_TEACHER.update
+	开发信息: 
+	处理信息: 修改记录
+	-->
+ 	<update id="update" parameterClass="StuPingjiaTeacher" >
+ 	INSERT  INTO  STU_PINGJIA_TEACHER   /*  */ 
+					(		
+					 ID		/* 编号 */ 
+					,STUID		/* 学生编号，外键 */ 
+					,TEACHERID		/* 教师编号，外键 */ 
+					,PINGJIASCORE		/*  */ 
+					)
+			values (
+					 #id#		/* 编号 */ 
+				  	,#stuid#		/* 学生编号，外键 */ 
+				  	,#teacherid#		/* 教师编号，外键 */ 
+				  	,#pingjiascore#		/*  */ 
+					)
+		ON DUPLICATE KEY
+		UPDATE   
+	    		 		STUID = #stuid# 
+	    		 		,TEACHERID = #teacherid# 
+	    		 		,PINGJIASCORE = #pingjiascore# 
+	</update>
+
+	
+	<!--
+	方法名称: deleteByPriKey
+	调用路径: STU_PINGJIA_TEACHER.deleteByPriKey
+	开发信息: 
+	处理信息: 删除记录
+	-->
+	<delete id="deleteByPriKey" parameterClass="StuPingjiaTeacher">
+		DELETE 	FROM STU_PINGJIA_TEACHER 	/*  */ 
+		WHERE 
+			ID = #id#		/* 编号 */ 
+	</delete>
+	
+	<!--
+	方法名称: findByPriKey
+	调用路径: STU_PINGJIA_TEACHER.findByPriKey
+	开发信息: 
+	处理信息: 根据主键查询记录
+	-->
+	<select id="findByPriKey" parameterClass="StuPingjiaTeacher"  resultClass="StuPingjiaTeacher">
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   FROM   STU_PINGJIA_TEACHER      AS spt      /*  */ 
+		   WHERE
+				ID = #id#		/* 编号 */ 
+	</select>
+	
+	<!--
+	方法名称: getPagenationList
+	调用路径: STU_PINGJIA_TEACHER.getPagenationList
+	开发信息: 
+	处理信息: 分页查询记录
+	-->
+	<select id="getPagenationList" parameterClass="PageQuery"  resultClass="StuPingjiaTeacher">
+			<!-- 分页条 -->
+		   <include refid="uf88.commons.pageBegin"/>
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   FROM   STU_PINGJIA_TEACHER      AS spt      /*  */ 
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+		<!-- 分页条 -->
+		<include refid="uf88.commons.pageEnd"/>
+			
+	</select>
+	
+	
+	<!--
+	方法名称: getItemCount
+	调用路径: STU_PINGJIA_TEACHER.getItemCount
+	开发信息: 
+	处理信息: 查询记录数
+	-->
+	<select id="getItemCount" parameterClass="PageQuery" resultClass="java.lang.Integer">
+		SELECT count(1)  FROM  STU_PINGJIA_TEACHER  AS spt	/*  */   
+		 WHERE 1=1
+		<include refid="wherecontation"/>
+	</select>
+	
+	
+	
+	<!--
+	方法名称: getAllList
+	调用路径: STU_PINGJIA_TEACHER.getAllList
+	开发信息: 
+	处理信息: 查询所有的记录
+	-->
+	<select id="getAllList" parameterClass="Query"  resultClass="StuPingjiaTeacher">
+		   SELECT   
+           <include refid="selectcolumn"/>
+		   FROM   STU_PINGJIA_TEACHER      AS spt      /*  */ 
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+	</select>
+	
+	
+</sqlMap>

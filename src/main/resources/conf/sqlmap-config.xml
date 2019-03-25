@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig  PUBLIC "-//iBATIS.com//DTD SQL Map
+Config 2.0/" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+
+<settings cacheModelsEnabled="true" enhancementEnabled="true"
+		lazyLoadingEnabled="false" errorTracingEnabled="true" maxRequests="32"
+		maxSessions="10" maxTransactions="5" useStatementNamespaces="true" />
+	<!-- 映射文件 -->
+		<sqlMap resource="sqlmap/uf88_commons.xml" /> 
+		<sqlMap resource="sqlmap/ADMIN.xml" /> 
+		<sqlMap resource="sqlmap/CLASS_INFO.xml" /> 
+		<sqlMap resource="sqlmap/CLUB.xml" /> 
+		<sqlMap resource="sqlmap/EFEI.xml" /> 
+		<sqlMap resource="sqlmap/GRADE.xml" />
+		<sqlMap resource="sqlmap/LEADER.xml" />
+		<sqlMap resource="sqlmap/QUESTION.xml" />
+		<sqlMap resource="sqlmap/STU_PIECHART.xml" />
+		<sqlMap resource="sqlmap/STU_PINGJIA_TEACHER.xml" /> 
+		<sqlMap resource="sqlmap/STUDENT.xml" /> 
+		<sqlMap resource="sqlmap/STUSCORE.xml" /> 
+		<sqlMap resource="sqlmap/SUBJECTS.xml" /> 
+		<sqlMap resource="sqlmap/TEACHER.xml" /> 
+		<sqlMap resource="sqlmap/TEACHERSCORE.xml" /> 
+</sqlMapConfig>

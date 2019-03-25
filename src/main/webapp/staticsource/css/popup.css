@@ -1,0 +1,210 @@
+
+/*日期控件样式*/
+.ui-widget-content,.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default,.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus,.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active,.ui-widget-header,.ui-slider a,.qcity .sicon,.qdate .sicon,.timebox,.errBox span,s.cms,.screening .on-click,.all-shop s{ background-image: url("http://www.zuzuche.com/img/web-icon.png")!important;background-repeat: no-repeat;}
+
+
+.prop-list dd .close, .prop-list dd .open, .fRental label.selected, .jselected label, .dbg1, .dbg2, .dbg3, .dbg4, .dbg5, .dbg6, .dbg7, .dbg8, .dbg9, .dbg10, .dbg11, .dbg12, .qdate .upTd, .qdate .downTd, .qcity .sicon, .qdate .sicon, .ftbl_list .clo li,.prop-item dl dd ul li a, .closeImg,.sys-ico, #selfdrive-error .error-img
+ { background: url("../images/city/bg-8.png") no-repeat scroll 0 0 transparent; }
+
+.is-bor:hover .qcity .sicon,.is-bor:hover .qdate .sicon { background-position:0 -287px !important;}
+
+.qcbox .popContainer { position:relative; z-index:1000; clear:both; }
+
+.qcbox .popPanel { position:absolute; z-index:1; top:1px; left:-1px; }
+
+
+.qcbox .infotext {
+    border-right: 1px solid #EAEAEA;
+    height: 20px;
+    line-height: 16px !important;
+    _line-height: 18px !important;
+    padding-right: 5px;
+}
+
+.qcbox .popPanel {
+    left: 0px;
+    top: 25px;
+	background-color: #FFFFFF;
+
+  }
+.qcbox .boxContainer {
+    height: 19px !important;
+    _line-height: 20px !important;
+}
+
+.useday .drive-r .ser-day .qcbox .shop-list a  {
+	cursor: pointer;
+    display: inline;
+    float: left;
+    overflow: hidden;
+    padding: 4px 2px;
+    text-align: center;
+    width: 15px;}
+	
+.useday .drive-r .ser-day .qcbox .shop-list a:hover{ background-color:#f1f1f1; text-decoration:none}
+	
+.useday .drive-r .ser-day .qcbox .shop-list a span { display:block;line-height: 16px;}
+
+.day-txt {
+    border-top: 1px solid #F0F0F0;
+    clear: both;
+    color: #AAAAAA;
+    font-size: 12px;
+    padding-left: 3px;
+}
+.qcity .cityinput { width:420px; }
+
+.qcity .cityinput .hint { padding:5px; font-size:12px; }
+
+.qcity .cityinput .closeImg { display:block; float:right; width:14px; height:14px; cursor:pointer; }
+
+.qcity .cityinput hr { clear:both; border:0; border-bottom:1px dashed #bbb; color:#fff; }
+
+.qcity .cityinput ul { margin:0; padding:0; height:1%; }
+
+.qcity .cityinput ul:after { clear:both; display:block; height:0; visibility:hidden; content:"\20"; }
+
+.qcity .cityinput ul li { float:left; padding:0px; width:20% !important; list-style-type: none; }
+
+.qcity .cityinput ul li a { padding: 1px;color:#555 !important;display: block; border: 1px solid #FFFFFF;width: 78px;text-decoration: none;}
+
+.qcity .cityinput ul li a:hover { text-decoration:none; color:#555; background: #F3F3F3; border: 1px solid #CCC; }
+
+.qcity .cityinput .inter ul li { width:25% !important; }
+
+.qcity .cityinput_hotel ul li { width:25% !important; }
+
+.hotCityNav { margin-top:4px; border-bottom:1px solid #ddd; _height:1%; overflow:hidden; }
+
+.hotCityNav span { position:relative; float:left; display:inline; margin-right:5px; border:1px solid #ddd; height:18px; font-size:12px; line-height:18px; text-align:center; background-color:#fff; color:#0069ca; cursor:pointer;margin-bottom: 5px; width: 44px; }
+
+.hotCityNav span.active { background-color:#e8edf1; }
+
+.qcity .cityinput .closeImg { display:block; float:right; width:14px; height:14px; cursor:pointer; background-position: -88px -2028px;}
+
+
+.light_red {
+    color: #D14836;!important;
+    font-size: 11px;
+}
+.qcbox .labelContainer { display:none; }
+
+.qcbox .boxWrapper { position:relative; z-index:1; }
+
+.qcbox .boxContainer { position:absolute; z-index:1; top:4px; right:0px; padding-right:2px; height:19px; background-color:#fff; cursor:pointer; overflow:hidden; }
+
+.qcbox .sinfo { float:left; display:inline; padding:0; font:normal 14px/16px simsun, arial, sans-serif; _line-height:18px; }
+
+.qcbox .infotext { color:#ccc; }
+
+.sicon { float:left; display:inline;background-position:0 -268px !important;height: 4px; margin-left: 6px; margin-top:7px;width: 8px;overflow:hidden;}
+
+
+.popPanel .dpanel,.popPanel .cityinput, .popPanel .shop-list{  border:1px solid #bbb; background-color:#fff; box-shadow:1px 1px 2px rgba(0, 0, 0, 0.15);
+		/* For IE 8 */
+		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=135, Color='#e5e5e5')";
+		/* For IE 5.5 - 7 */
+		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=135, Color='#e5e5e5');
+
+	}
+	
+.qcbox .errtext { color:red !important; }
+	
+.qcbox .ill { width:185px;   border:1px solid #d5d5d5; background-color:#fff; box-shadow:1px 1px 2px #e5e5e5;
+		/* For IE 8 */
+		-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=135, Color='#e5e5e5')";
+		/* For IE 5.5 - 7 */
+		filter: progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=135, Color='#e5e5e5');}
+
+.First-schbox .First-daijia .qcbox .ill{width: 205px;}
+
+.qcbox .illrow { line-height: 22px; }
+
+.qcbox .illrow td { padding:0 0 0 4px !important; overflow:hidden; cursor: pointer; white-space:nowrap; }
+
+.qcbox td.illn { line-height: 24px; font-size:13px; padding-left:8px; text-align:left; font-family:simsun; padding-left:4px; }
+
+.qcbox .illt { color: green; line-height: 24px; font-size:11px; padding-right:4px; text-align:right; font-family:arial, sans-serif, SimSun; }
+
+.qcbox .tllover td { color: white; background-color:#4778da; }
+
+.qcbox .keystring { color:#f60; }
+
+.qcbox .error td { font-size:13px; background-color:#c30; color:#fff; }
+	
+.qcbox { float:left; display:inline;}
+
+.qcbox .boxContainer { height:15px; }
+
+.qcbox .sinfo { font:normal 12px/16px simsun, arial, sans-serif; _line-height:18px; }
+
+
+
+.sel-city:hover .qcity .sicon,.sel-city:hover .qdate .sicon { background-position:0 -287px !important;}
+.qcbox .infotext {
+    border-right: 1px solid #EAEAEA;
+    height: 20px;
+    line-height: 18px !important;
+    _line-height: 20px !important;
+    padding-right: 5px;
+}
+
+
+
+.dbg1 { background-position:45px -665px; }
+
+.dbg2 { background-position:45px -772px; }
+
+.dbg3 { background-position:45px -882px; }
+
+.dbg4 { background-position:45px -995px; }
+
+.dbg5 { background-position:45px -1104px; }
+
+.dbg6 { background-position:45px -1216px; }
+
+.dbg7 { background-position:45px -1325px; }
+
+.dbg8 { background-position:45px -1431px; }
+
+.dbg9 { background-position:45px -1542px; }
+
+.dbg10 { background-position:35px -1652px; }
+
+.dbg11 { background-position:35px -1762px; }
+
+.dbg12 { background-position:35px -1872px; }
+
+.qdate .dpanel { width:340px; overflow:hidden; *zoom:1; position:relative;}
+
+.qdate .dpanel:after { clear:both; display:block; height:0; visibility:hidden; content:"\20"; }
+
+.qdate .dpart { position:relative;float:left; display:inline; margin-bottom:3px;margin-top:3px;margin-left:-1px; border-left:1px dotted #e5e5e5; width:170px; color:#000; overflow:hidden; }
+
+.qdate .dpart h3 { height:24px; font:normal 12px/24px tahoma, arial, sans-serif; text-align:center; background-color:#fff; color:#1155CC;margin:0;padding:0;display:block; }
+
+.qdate .dpart table { margin:0 1px 1px 1px; padding:0; border:0 none; border-collapse:collapse; width:168px; }
+
+.qdate .dpart td { margin:0; padding:0 !important; width:24px; height:18px; font:normal 12px/18px tahoma, arial, sans-serif; text-align:center; vertical-align:middle; }
+
+.qdate .dpart .thead td { border-bottom:1px solid #e5e5e5; height:21px; line-height:21px;background-color:#fff; }
+
+.qdate .upTd { position:absolute; top:0; left:0; width:24px; height:24px; cursor:pointer; background-position:-45px -2022px; }
+
+.qdate .downTd { position:absolute; top:0; right:0; width:24px; height:24px; cursor:pointer; background-position:-62px -2022px; }
+
+.qdate .cnone { color:#999; cursor:default; }
+
+.qdate .holi { color:#DD4B39; }
+
+.qdate .today { color:#00f; }
+
+.qdate .curr { background-color:#fdab00; color:#fff; }
+
+.qdate .othr { background-color:#6899ff; color:#fff; }
+
+.qdate .onmouseover { background-color:#fdab00; color:#fff; cursor:pointer; }
+
+.qdate .out { background-color:transparent; color:#999; cursor:not-allowed; }
+
+.z-index2{z-index:2}

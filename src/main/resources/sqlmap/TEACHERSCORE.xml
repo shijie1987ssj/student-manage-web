@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--
+功能模块: 
+开发信息: 
+-->
+<sqlMap namespace="TEACHERSCORE">
+	<typeAlias alias="Teacherscore" type="com.uf88.admin.pojo.Teacherscore"/>
+	<typeAlias alias="TeacherscoreSum" type="com.uf88.admin.pojo.TeacherscoreSum"/>
+	<typeAlias alias="TeacherscoreVo" type="com.uf88.admin.pojo.TeacherscoreVo"/>
+	<typeAlias alias="PageQuery" type="com.uf88.uf88core.PageQuery"/>
+	<typeAlias alias="Query" type="com.uf88.uf88core.Query"/>
+	
+	<sql id="wherecontation">
+		<dynamic>
+				 /*  */ 
+				 <isNotEmpty prepend="and" property="query.teacherscore">
+	  		 		t.TEACHERSCORE = #query.teacherscore#
+				 </isNotEmpty>
+				 /*  */ 
+				 <isNotEmpty prepend="and" property="query.showNoScore">
+	  		 		t.TEACHERSCORE is null
+				 </isNotEmpty>
+				 /*  */ 
+				 <isNotEmpty prepend="and" property="query.showScore">
+	  		 		t.TEACHERSCORE is not null
+				 </isNotEmpty>
+	  	</dynamic>
+	</sql>
+	
+	<sql id="selectcolumn">
+		<dynamic>
+			       
+				 IFNULL(t.TEACHERSCORE,0)	   AS	teacherscore	/*  */
+				 
+				 
+	  	</dynamic>
+	</sql>
+	
+	<!--
+	方法名称: insert
+	调用路径: TEACHERSCORE.insert
+	开发信息: 
+	处理信息: 保存记录
+	-->
+ 	<insert id="insert" parameterClass="Teacherscore" >
+	 	INSERT  INTO  TEACHERSCORE   /*  */ 
+					(		
+					 TEACHERID		/*  */ 
+					,TEACHERSCORE		/*  */ 
+					)
+			values (
+					 #teacherid#		/*  */ 
+				  	,#teacherscore#		/*  */ 
+					) 
+	</insert>
+	
+	
+	<!--
+	方法名称: update
+	调用路径: TEACHERSCORE.update
+	开发信息: 
+	处理信息: 修改记录
+	-->
+ 	<update id="update" parameterClass="Teacherscore" >
+ 	INSERT  INTO  TEACHERSCORE   /*  */ 
+					(		
+					 TEACHERID		/*  */ 
+					,TEACHERSCORE		/*  */ 
+					)
+			values (
+					 #teacherid#		/*  */ 
+				  	,#teacherscore#		/*  */ 
+					)
+		ON DUPLICATE KEY
+		UPDATE   
+	    		 		TEACHERSCORE = #teacherscore#  
+	</update>
+
+	
+	<!--
+	方法名称: deleteByPriKey
+	调用路径: TEACHERSCORE.deleteByPriKey
+	开发信息: 
+	处理信息: 删除记录
+	-->
+	<delete id="deleteByPriKey" parameterClass="Teacherscore">
+		DELETE 	FROM TEACHERSCORE 	/*  */ 
+		WHERE 
+			TEACHERID = #teacherid#		/*  */ 
+	</delete>
+	
+	<!--
+	方法名称: findByPriKey
+	调用路径: TEACHERSCORE.findByPriKey
+	开发信息: 
+	处理信息: 根据主键查询记录
+	-->
+	<select id="findByPriKey" parameterClass="Teacherscore"  resultClass="Teacherscore">
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   FROM   TEACHERSCORE      AS t      /*  */ 
+		   WHERE
+				TEACHERID = #teacherid#		/*  */ 
+	</select>
+	
+	<!--
+	方法名称: getPagenationList
+	调用路径: TEACHERSCORE.getPagenationList
+	开发信息: 
+	处理信息: 分页查询记录
+	-->
+	<select id="getPagenationList" parameterClass="PageQuery"  resultClass="TeacherscoreVo">
+			<!-- 分页条 -->
+		   <include refid="uf88.commons.pageBegin"/>
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   ,tt.TEACHERID	   AS	teacherid	/* 教师编号 */ 
+				 ,tt.TEACHERNAME	   AS	teachername	/* 教师姓名 */ 
+				 ,tt.TEACHERAGE	   AS	teacherage	/* 年龄 */ 
+				 ,tt.TEACHERSEX	   AS	teachersex	/* 性别 */ 
+				 ,tt.TEACHERPASS	   AS	teacherpass	/* 密码 */ 
+				 ,tt.TEACHERCLASS	   AS	teacherclass	/* 授课班级，外键 */ 
+				 ,tt.TEACHERCLUB	   AS	teacherclub	/* 所在院系，外键 */ 
+				 ,tt.SUBJECT	   AS	subject	/* 所带课程，外键 */ 
+				 ,tt.SCHOOL	   AS	school	/* 毕业院校 */ 
+				 ,tt.TEACHEREMAIL	   AS	teacheremail	/* 教师邮箱 */ 
+				 ,tt.PINGJIA	   AS	pingjia	/* 是否评价 */  
+		   FROM teacher tt LEFT JOIN    TEACHERSCORE      AS t     ON tt.`Teacherid` = t.`Teacherid`
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+		<!-- 分页条 -->
+		<include refid="uf88.commons.pageEnd"/>
+			
+	</select>
+	
+	
+	<!--
+	方法名称: getItemCount
+	调用路径: TEACHERSCORE.getItemCount
+	开发信息: 
+	处理信息: 查询记录数
+	-->
+	<select id="getItemCount" parameterClass="PageQuery" resultClass="java.lang.Integer">
+		SELECT count(1)  
+		FROM teacher tt LEFT JOIN    TEACHERSCORE      AS t     ON tt.`Teacherid` = t.`Teacherid`   
+		 WHERE 1=1
+		<include refid="wherecontation"/>
+	</select>
+	
+	
+	
+	<!--
+	方法名称: getAllList
+	调用路径: TEACHERSCORE.getAllList
+	开发信息: 
+	处理信息: 查询所有的记录
+	-->
+	<select id="getAllList" parameterClass="Query"  resultClass="Teacherscore">
+		   SELECT   
+           <include refid="selectcolumn"/>
+		   FROM   TEACHERSCORE      AS t      /*  */ 
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+	</select>
+	
+		<!--
+	方法名称: getAllListSum
+	调用路径: TEACHERSCORE.getAllListSum
+	开发信息: 
+	处理信息: 查询所有的记录
+	-->
+	<select id="getAllListSum" parameterClass="Query"  resultClass="TeacherscoreSum">
+		   SELECT COUNT(1) sumnum, t.`teacherclub`,t.`teacherclass`,MAX(t.`teacherscore`) maxscore,
+				MIN(t.`teacherscore`) minscore,avg(t.Teacherscore) avgscore,
+				SUM(pass) pass,SUM(nopass) nopass,SUM(gradec) gradec,SUM(gradeb) gradeb,
+				SUM(gradea) gradea
+			FROM (
+				SELECT t.`teacherclub`,t.`teacherclass`,ts.teacherscore,
+				CASE WHEN ts.teacherscore &gt;= 60 THEN 1 ELSE 0 END AS pass,
+				CASE WHEN ts.teacherscore &lt; 60 THEN 1 ELSE 0 END AS nopass,
+				CASE WHEN ts.teacherscore &gt;= 60 AND ts.teacherscore &lt; 75 THEN 1 ELSE 0 END AS gradec,
+				CASE WHEN ts.teacherscore &gt;= 75 AND ts.teacherscore &lt; 85 THEN 1 ELSE 0 END AS gradeb,
+				CASE WHEN ts.teacherscore &gt;= 85 AND ts.teacherscore &lt;= 100 THEN 1 ELSE 0 END AS gradea
+				FROM teacher t INNER JOIN Teacherscore ts ON t.`Teacherid` = ts.`Teacherid`  
+			)t
+			GROUP BY t.`teacherclub`,t.`teacherclass`
+	</select>
+	
+</sqlMap>

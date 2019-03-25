@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--
+功能模块: 
+开发信息: 
+-->
+<sqlMap namespace="STUSCORE">
+	<typeAlias alias="Stuscore" type="com.uf88.admin.pojo.Stuscore"/>
+	<typeAlias alias="StuscoreSum" type="com.uf88.admin.pojo.StuscoreSum"/>
+	<typeAlias alias="StuscoreVo" type="com.uf88.admin.pojo.StuscoreVo"/>
+	<typeAlias alias="PageQuery" type="com.uf88.uf88core.PageQuery"/>
+	<typeAlias alias="Query" type="com.uf88.uf88core.Query"/>
+	
+	<sql id="wherecontation">
+		<dynamic>
+				 /*  */ 
+				 <isNotEmpty prepend="and" property="query.english">
+	  		 		s.ENGLISH = #query.english#
+				 </isNotEmpty>
+				 /*  */ 
+				 <isNotEmpty prepend="and" property="query.math">
+	  		 		s.MATH = #query.math#
+				 </isNotEmpty>
+				 /*  */ 
+				 <isNotEmpty prepend="and" property="query.chinese">
+	  		 		s.CHINESE = #query.chinese#
+				 </isNotEmpty>
+				 /*  */ 
+				 <isNotEmpty prepend="and" property="query.computer">
+	  		 		s.COMPUTER = #query.computer#
+				 </isNotEmpty>
+				 /*  */ 
+				 <isNotEmpty prepend="and" property="query.sumscore">
+	  		 		s.SUMSCORE = #query.sumscore#
+				 </isNotEmpty>
+				 /*  */ 
+				 <isNotEmpty prepend="and" property="query.rank">
+	  		 		s.RANK = #query.rank#
+				 </isNotEmpty>
+	  	</dynamic>
+	</sql>
+	
+	<sql id="selectcolumn">
+		<dynamic>
+			      
+				 s.ENGLISH	   AS	english	/*  */ 
+				 ,s.MATH	   AS	math	/*  */ 
+				 ,s.CHINESE	   AS	chinese	/*  */ 
+				 ,s.COMPUTER	   AS	computer	/*  */ 
+				 ,s.SUMSCORE	   AS	sumscore	/*  */ 
+				 ,s.RANK	   AS	rank	/*  */ 
+				 
+				 ,st.STUID	   AS	stuid	/*  */ 
+				 ,st.STUNAME	   AS	stuname	/* 学生姓名 */ 
+				 ,st.STUPASS	   AS	stupass	/* 密码 */ 
+				 ,st.STUAGE	   AS	stuage	/* 年龄 */ 
+				 ,st.STUSEX	   AS	stusex	/* 性别 */ 
+				 ,st.STUCLASS	   AS	stuclass	/* 所在班级，外键 */ 
+				 ,st.STUCLUB	   AS	stuclub	/* 所在院系，外键 */ 
+				 ,st.STUQQ	   AS	stuqq	/* QQ号 */ 
+				 ,st.STUTELEPHONE	   AS	stutelephone	/* 电话号码 */ 
+				 ,st.STUEMAIL	   AS	stuemail	/* 邮箱 */ 
+				 ,st.STUGRADE	   AS	stugrade	/* 所在年级，外键 */ 
+	  	</dynamic>
+	</sql>
+	
+	<!--
+	方法名称: insert
+	调用路径: STUSCORE.insert
+	开发信息: 
+	处理信息: 保存记录
+	-->
+ 	<insert id="insert" parameterClass="Stuscore" >
+	 	INSERT  INTO  STUSCORE   /*  */ 
+					(		
+					 STUID		/*  */ 
+					,ENGLISH		/*  */ 
+					,MATH		/*  */ 
+					,CHINESE		/*  */ 
+					,COMPUTER		/*  */ 
+					,SUMSCORE		/*  */ 
+					,RANK		/*  */ 
+					)
+			values (
+					 #stuid#		/*  */ 
+				  	,#english#		/*  */ 
+				  	,#math#		/*  */ 
+				  	,#chinese#		/*  */ 
+				  	,#computer#		/*  */ 
+				  	,#sumscore#		/*  */ 
+				  	,#rank#		/*  */ 
+					) 
+	</insert>
+	
+	
+	<!--
+	方法名称: update
+	调用路径: STUSCORE.update
+	开发信息: 
+	处理信息: 修改记录
+	-->
+ 	<update id="update" parameterClass="Stuscore" >
+ 	INSERT  INTO  STUSCORE   /*  */ 
+					(		
+					 STUID		/*  */ 
+					,ENGLISH		/*  */ 
+					,MATH		/*  */ 
+					,CHINESE		/*  */ 
+					,COMPUTER		/*  */ 
+					,SUMSCORE		/*  */ 
+					,RANK		/*  */ 
+					)
+			values (
+					 #stuid#		/*  */ 
+				  	,#english#		/*  */ 
+				  	,#math#		/*  */ 
+				  	,#chinese#		/*  */ 
+				  	,#computer#		/*  */ 
+				  	,#sumscore#		/*  */ 
+				  	,#rank#		/*  */ 
+					)
+		ON DUPLICATE KEY
+		UPDATE     
+	    		 		ENGLISH = #english# 
+	    		 		,MATH = #math# 
+	    		 		,CHINESE = #chinese# 
+	    		 		,COMPUTER = #computer# 
+	    		 		,SUMSCORE = #sumscore# 
+	    		 		,RANK = #rank#  
+	</update>
+
+	
+	<!--
+	方法名称: deleteByPriKey
+	调用路径: STUSCORE.deleteByPriKey
+	开发信息: 
+	处理信息: 删除记录
+	-->
+	<delete id="deleteByPriKey" parameterClass="Stuscore">
+		DELETE 	FROM STUSCORE 	/*  */ 
+		WHERE 
+			STUID = #stuid#		/*  */ 
+	</delete>
+	
+	<!--
+	方法名称: findByPriKey
+	调用路径: STUSCORE.findByPriKey
+	开发信息: 
+	处理信息: 根据主键查询记录
+	-->
+	<select id="findByPriKey" parameterClass="Stuscore"  resultClass="StuscoreVo">
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   
+		   FROM  student st LEFT JOIN STUSCORE      AS s       ON s.`stuid` = st.`Stuid`
+		   WHERE
+				st.STUID = #stuid#		/*  */ 
+	</select>
+	
+	<!--
+	方法名称: getPagenationList
+	调用路径: STUSCORE.getPagenationList
+	开发信息: 
+	处理信息: 分页查询记录
+	-->
+	<select id="getPagenationList" parameterClass="PageQuery"  resultClass="StuscoreVo">
+			<!-- 分页条 -->
+		   <include refid="uf88.commons.pageBegin"/>
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   FROM  student st LEFT JOIN STUSCORE      AS s       ON s.`stuid` = st.`Stuid`
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+		<!-- 分页条 -->
+		<include refid="uf88.commons.pageEnd"/>
+			
+	</select>
+	
+	
+	<!--
+	方法名称: getItemCount
+	调用路径: STUSCORE.getItemCount
+	开发信息: 
+	处理信息: 查询记录数
+	-->
+	<select id="getItemCount" parameterClass="PageQuery" resultClass="java.lang.Integer">
+		SELECT count(1)  
+		FROM  student st LEFT JOIN STUSCORE      AS s       ON s.`stuid` = st.`Stuid`
+		 WHERE 1=1
+		<include refid="wherecontation"/>
+	</select>
+	
+	
+	
+	<!--
+	方法名称: getAllList
+	调用路径: STUSCORE.getAllList
+	开发信息: 
+	处理信息: 查询所有的记录
+	-->
+	<select id="getAllList" parameterClass="Query"  resultClass="Stuscore">
+		   SELECT   
+           <include refid="selectcolumn"/>
+		   FROM   STUSCORE      AS s      /*  */ 
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+	</select>
+	
+		<!--
+	方法名称: getAllListSum
+	调用路径: STUSCORE.getAllListSum
+	开发信息: 
+	处理信息: 查询所有的记录
+	-->
+	<select id="getAllListSum" parameterClass="Query"  resultClass="StuscoreSum">
+		   SELECT COUNT(1) sumnum, t.`stuclub`,t.`stuclass`,MAX(t.`Sumscore`) maxscore,
+				MIN(t.`Sumscore`) minscore,avg(t.Sumscore) avgscore,
+				SUM(pass) pass,SUM(nopass) nopass,SUM(gradec) gradec,SUM(gradeb) gradeb,
+				SUM(gradea) gradea
+			FROM (
+				SELECT t.`stuclub`,t.`stuclass`,ts.sumscore,
+				CASE WHEN ts.Sumscore &gt;= 60 THEN 1 ELSE 0 END AS pass,
+				CASE WHEN ts.Sumscore &lt; 60 THEN 1 ELSE 0 END AS nopass,
+				CASE WHEN ts.Sumscore &gt;= 60 AND ts.Sumscore &lt; 75 THEN 1 ELSE 0 END AS gradec,
+				CASE WHEN ts.Sumscore &gt;= 75 AND ts.Sumscore &lt; 85 THEN 1 ELSE 0 END AS gradeb,
+				CASE WHEN ts.Sumscore &gt;= 85 AND ts.Sumscore &lt;= 100 THEN 1 ELSE 0 END AS gradea
+				FROM student t INNER JOIN stuscore ts ON t.`stuid` = ts.`stuid` 
+			)t
+			GROUP BY t.`stuclub`,t.`stuclass`
+	</select>
+	
+</sqlMap>

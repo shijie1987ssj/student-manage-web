@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--
+功能模块: 
+开发信息: 
+-->
+<sqlMap namespace="STU_PIECHART">
+	<typeAlias alias="StuPiechart" type="com.uf88.admin.pojo.StuPiechart"/>
+	<typeAlias alias="PageQuery" type="com.uf88.uf88core.PageQuery"/>
+	<typeAlias alias="Query" type="com.uf88.uf88core.Query"/>
+	
+	<sql id="wherecontation">
+		<dynamic>
+				 /*  */ 
+				 <isNotEmpty prepend="and" property="query.description">
+	  		 		sp.DESCRIPTION = #query.description#
+				 </isNotEmpty>
+				 /*  */ 
+				 <isNotEmpty prepend="and" property="query.value">
+	  		 		sp.VALUE = #query.value#
+				 </isNotEmpty>
+	  	</dynamic>
+	</sql>
+	
+	<sql id="selectcolumn">
+		<dynamic>
+			      sp.ID	   AS	id	/*  */ 
+				 ,sp.DESCRIPTION	   AS	description	/*  */ 
+				 ,sp.VALUE	   AS	value	/*  */ 
+	  	</dynamic>
+	</sql>
+	
+	<!--
+	方法名称: insert
+	调用路径: STU_PIECHART.insert
+	开发信息: 
+	处理信息: 保存记录
+	-->
+ 	<insert id="insert" parameterClass="StuPiechart" >
+	 	INSERT  INTO  STU_PIECHART   /*  */ 
+					(		
+					 ID		/*  */ 
+					,DESCRIPTION		/*  */ 
+					,VALUE		/*  */ 
+					)
+			values (
+					 #id#		/*  */ 
+				  	,#description#		/*  */ 
+				  	,#value#		/*  */ 
+					)
+			<selectKey resultClass="long" keyProperty="id">    
+             SELECT LAST_INSERT_ID() AS ID    
+        </selectKey>  
+	</insert>
+	
+	
+	<!--
+	方法名称: update
+	调用路径: STU_PIECHART.update
+	开发信息: 
+	处理信息: 修改记录
+	-->
+ 	<update id="update" parameterClass="StuPiechart" >
+		UPDATE   STU_PIECHART  	/*  */ 
+	  		<dynamic prepend=" SET ">
+					 /*  */ 
+					 <isNotNull  property="description" prepend=",">
+	    		 		DESCRIPTION = #description#
+					 </isNotNull>
+					 /*  */ 
+					 <isNotNull  property="value" prepend=",">
+	    		 		VALUE = #value#
+					 </isNotNull>
+	  	  </dynamic>
+				WHERE
+	  	 		 		ID = #id#		/*  */ 
+	</update>
+
+	
+	<!--
+	方法名称: deleteByPriKey
+	调用路径: STU_PIECHART.deleteByPriKey
+	开发信息: 
+	处理信息: 删除记录
+	-->
+	<delete id="deleteByPriKey" parameterClass="StuPiechart">
+		DELETE 	FROM STU_PIECHART 	/*  */ 
+		WHERE 
+			ID = #id#		/*  */ 
+	</delete>
+	
+	<!--
+	方法名称: findByPriKey
+	调用路径: STU_PIECHART.findByPriKey
+	开发信息: 
+	处理信息: 根据主键查询记录
+	-->
+	<select id="findByPriKey" parameterClass="StuPiechart"  resultClass="StuPiechart">
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   FROM   STU_PIECHART      AS sp      /*  */ 
+		   WHERE
+				ID = #id#		/*  */ 
+	</select>
+	
+	<!--
+	方法名称: getPagenationList
+	调用路径: STU_PIECHART.getPagenationList
+	开发信息: 
+	处理信息: 分页查询记录
+	-->
+	<select id="getPagenationList" parameterClass="PageQuery"  resultClass="StuPiechart">
+			<!-- 分页条 -->
+		   <include refid="uf88.commons.pageBegin"/>
+		   SELECT   
+		   <include refid="selectcolumn"/>
+		   FROM   STU_PIECHART      AS sp      /*  */ 
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+		<!-- 分页条 -->
+		<include refid="uf88.commons.pageEnd"/>
+			
+	</select>
+	
+	
+	<!--
+	方法名称: getItemCount
+	调用路径: STU_PIECHART.getItemCount
+	开发信息: 
+	处理信息: 查询记录数
+	-->
+	<select id="getItemCount" parameterClass="PageQuery" resultClass="java.lang.Integer">
+		SELECT count(1)  FROM  STU_PIECHART  AS sp	/*  */   
+		 WHERE 1=1
+		<include refid="wherecontation"/>
+	</select>
+	
+	
+	
+	<!--
+	方法名称: getAllList
+	调用路径: STU_PIECHART.getAllList
+	开发信息: 
+	处理信息: 查询所有的记录
+	-->
+	<select id="getAllList" parameterClass="Query"  resultClass="StuPiechart">
+		   SELECT   
+           <include refid="selectcolumn"/>
+		   FROM   STU_PIECHART      AS sp      /*  */ 
+		   WHERE 1=1
+		 	<include refid="wherecontation"/>
+	</select>
+	
+	
+</sqlMap>
